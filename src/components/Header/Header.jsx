@@ -13,7 +13,7 @@ const Header = () => (
         520<span>&#8381;</span>
       </span>
       <span className={classes.cart}>
-        <CartSvg className={classes.svg} />3
+        <CartSvg className={classes.cart_svg} />3
       </span>
     </Button>
   </div>
