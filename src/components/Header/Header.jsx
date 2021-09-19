@@ -1,7 +1,7 @@
 import Button from 'components/UI/Button/Button';
 import Logo from 'components/Logo/Logo';
 
-import { ReactComponent as CartSvg } from '../../img/shopping-cart.svg';
+import { ReactComponent as CartSvg } from '../../img/svg/shopping-cart.svg';
 
 import classes from './Header.module.scss';
 

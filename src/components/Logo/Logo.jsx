@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as SvgLogo } from '../../img/logo-pizza.svg';
+import { ReactComponent as SvgLogo } from '../../img/svg/logo-pizza.svg';
 
 import classes from './Logo.module.scss';
 

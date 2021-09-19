@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { arrayOf, shape, string } from 'prop-types';
 
-import { ReactComponent as SortArrow } from '../../img/arrow.svg';
+import { ReactComponent as SortArrow } from '../../img/svg/arrow.svg';
 
 import classes from './SortSection.module.scss';
 
