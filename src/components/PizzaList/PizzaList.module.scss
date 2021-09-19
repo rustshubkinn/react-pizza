@@ -1,0 +1,22 @@
+.pizza_lists {
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    align-self: flex-start;
+    margin-bottom: 35px;
+
+    font-size: 32px;
+    line-height: 39px;
+  }
+
+  .pizza_list {
+    margin-bottom: 65px;
+  }
+
+  .lists_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

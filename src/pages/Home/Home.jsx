@@ -1,6 +1,7 @@
 import Header from 'components/Header/Header';
 import FilterSection from 'components/FilterSection/FilterSection';
 
+import PizzaList from 'components/PizzaList/PizzaList';
 import classes from './Home.module.scss';
 
 const Home = () => (
@@ -10,6 +11,7 @@ const Home = () => (
     </header>
     <main>
       <FilterSection />
+      <PizzaList />
     </main>
   </div>
 );
