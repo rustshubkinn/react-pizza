@@ -31,7 +31,7 @@ const PizzaList = () => {
             doughs={data.doughs}
             sizes={data.sizes}
             options={options}
-            className={classes.pizza_list}
+            className={classes.pizza_item}
           />
         ))}
         {pizza.map((data) => (
@@ -43,6 +43,7 @@ const PizzaList = () => {
             doughs={data.doughs}
             sizes={data.sizes}
             options={options}
+            className={classes.pizza_item}
           />
         ))}
       </div>
