@@ -5,7 +5,7 @@ import './FilterSection.module.scss';
 
 const MOCK_TYPES = [
   {
-    value: '',
+    value: 'all',
     name: 'Все',
   },
   {
