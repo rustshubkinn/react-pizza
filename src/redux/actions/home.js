@@ -24,7 +24,7 @@ export const fetchAllPizza = () => async (dispatch) => {
   return true;
 };
 
-export const filterPizzaByType = (value) => async (dispatch) => {
+export const filterPizzaByType = (type) => async (dispatch) => {
   dispatch({
     type: 'FILTER_PIZZA_REQUEST',
     payload: { loading: true },
@@ -32,8 +32,7 @@ export const filterPizzaByType = (value) => async (dispatch) => {
 
   const result = await fetchPizza();
 
-  if (value === '') {
-    console.log('false');
+  if (type.value === 'all') {
     dispatch({
       type: 'FILTER_PIZZA_SUCCESS',
       payload: {
@@ -42,8 +41,7 @@ export const filterPizzaByType = (value) => async (dispatch) => {
       },
     });
   } else {
-    console.log('true');
-    const filteredPizza = result.filter((pizza) => pizza.type === value);
+    const filteredPizza = result.filter((pizza) => pizza.type === type.value);
 
     dispatch({
       type: 'FILTER_PIZZA_SUCCESS',
