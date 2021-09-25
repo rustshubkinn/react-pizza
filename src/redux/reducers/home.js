@@ -22,6 +22,14 @@ export const home = (state = INITIAL_STATE, action) => {
       const { pizza, loading } = action.payload;
       return { ...state, pizza, loading };
     }
+    case 'SORT_PIZZA_REQUEST': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
+    case 'SORT_PIZZA_SUCCESS': {
+      const { pizza, loading } = action.payload;
+      return { ...state, pizza, loading };
+    }
     default:
       return { ...state };
   }

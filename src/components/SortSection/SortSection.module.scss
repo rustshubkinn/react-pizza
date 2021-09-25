@@ -52,10 +52,15 @@ form {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
 
-    li {
+    button {
+      width: 100%;
       padding: 10px 25px 10px 14px;
 
-      list-style: none;
+      text-align: start;
+
+      background: #fff;
+
+      border: 0;
 
       &:hover {
         color: #fe5f1e;

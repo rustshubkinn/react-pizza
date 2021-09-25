@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { arrayOf, shape, string } from 'prop-types';
+
+import { sortPizza } from 'redux/actions/home';
 
 import { ReactComponent as SortArrow } from '../../img/svg/arrow.svg';
 
@@ -7,12 +10,23 @@ import classes from './SortSection.module.scss';
 
 const SortSection = ({ options, id }) => {
   const [isActive, setIsActive] = useState(false);
+  const [activeOption, setOption] = useState('популярности');
+  const dispatch = useDispatch();
 
   const renderOptions = () =>
     options.map((option) => (
-      <li key={option.value} value={option.value}>
+      <button
+        key={option.value}
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          setOption(option.name);
+          dispatch(sortPizza(option));
+        }}
+        value={option.value}
+      >
         {option.name}
-      </li>
+      </button>
     ));
 
   const toggleDropdown = () => setIsActive(!isActive);
@@ -37,7 +51,7 @@ const SortSection = ({ options, id }) => {
         role="button"
         tabIndex="0"
       >
-        популярности
+        {activeOption}
         {isActive ? (
           <div className={classes.sort_wrapper}>{renderOptions()}</div>
         ) : (
