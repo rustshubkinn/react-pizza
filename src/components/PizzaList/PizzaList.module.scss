@@ -14,9 +14,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
 
     .pizza_item {
-      margin: 0 15px;
       margin-bottom: 65px;
     }
   }
