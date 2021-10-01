@@ -1,6 +1,7 @@
 export const INITIAL_STATE = {
   pizza: [],
   options: [],
+  newOrder: { orderPrice: 0 },
   loading: false,
 };
 
@@ -29,6 +30,14 @@ export const home = (state = INITIAL_STATE, action) => {
     case 'SORT_PIZZA_SUCCESS': {
       const { pizza, loading } = action.payload;
       return { ...state, pizza, loading };
+    }
+    case 'ORDER_PIZZA_REQUEST': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
+    case 'ORDER_PIZZA_SUCCESS': {
+      const { loading, newOrder } = action.payload;
+      return { ...state, loading, newOrder };
     }
     default:
       return { ...state };

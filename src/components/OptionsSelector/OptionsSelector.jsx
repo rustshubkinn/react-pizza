@@ -1,33 +1,80 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { arrayOf, number, objectOf, shape, string } from 'prop-types';
+
+import Button from 'components/UI/Button/Button';
+
+import { addToCart } from 'redux/actions/home';
+
 import classes from './OptionsSelector.module.scss';
 
-const OptionsSelector = ({ options, doughs, sizes }) => {
-  console.log(doughs, sizes);
+const OptionsSelector = ({ name, price, options, doughs, sizes }) => {
+  const dispatch = useDispatch();
+  const [activeDough, setActiveDough] = useState('');
+  const [activeSize, setActiveSize] = useState('');
 
   const availableDoughs = Object.values(options.doughs).map((res) => res.value);
   const availableSizes = Object.values(options.sizes).map((res) => res.value);
 
+  const dough = doughs.map((dgh) => dgh);
+  const size = sizes.map((szs) => szs);
+
+  const orderHandler = () => {
+    dispatch(addToCart({ name, price, activeDough, activeSize }));
+  };
+
   return (
-    <div className={classes.options_wrapper}>
-      <div className={classes.options_buttons}>
-        {availableDoughs.map((dough) => (
-          <button type="button" key={dough}>
-            {dough}
-          </button>
-        ))}
+    <div className={classes.selector_wrapper}>
+      <div className={classes.options_wrapper}>
+        <div className={classes.options_buttons}>
+          {availableDoughs.map((dg) => (
+            <button
+              type="button"
+              key={dg}
+              onClick={() => setActiveDough(dg)}
+              className={classNames({
+                [classes.disabled]: !dough.includes(dg),
+                [classes.active]: activeDough === dg,
+              })}
+              disabled={!dough.includes(dg)}
+            >
+              {dg}
+            </button>
+          ))}
+        </div>
+        <div className={classes.options_buttons}>
+          {availableSizes.map((sz) => (
+            <button
+              type="button"
+              key={sz}
+              onClick={() => setActiveSize(sz)}
+              className={classNames({
+                [classes.disabled]: !size.includes(sz),
+                [classes.active]: activeSize === sz,
+              })}
+              disabled={!size.includes(sz)}
+            >
+              {sz} см.
+            </button>
+          ))}
+        </div>
       </div>
-      <div className={classes.options_buttons}>
-        {availableSizes.map((size) => (
-          <button type="button" key={size}>
-            {size} см.
-          </button>
-        ))}
+      <div className={classes.order_pizza}>
+        <b>
+          от {price} <span>&#8381;</span>
+        </b>
+        <Button onClick={orderHandler} className={classes.add_button}>
+          <span>&#65291;</span> Добавить
+        </Button>
       </div>
     </div>
   );
 };
 
 OptionsSelector.propTypes = {
+  name: string.isRequired,
+  price: number.isRequired,
   options: objectOf(arrayOf(shape({}))).isRequired,
   doughs: arrayOf(string).isRequired,
   sizes: arrayOf(number).isRequired,

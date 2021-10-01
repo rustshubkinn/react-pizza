@@ -96,3 +96,24 @@ export const sortPizza = (option) => async (dispatch) => {
     });
   }
 };
+
+export const addToCart =
+  ({ activeDough, activeSize, price, name }) =>
+  async (dispatch) => {
+    dispatch({
+      type: 'ADD_TO_CART_REQUEST',
+      payload: { loading: true },
+    });
+
+    const newOrder = {
+      name,
+      orderPrice: price,
+      activeDough,
+      activeSize,
+    };
+
+    dispatch({
+      type: 'ADD_TO_CART_SUCCESS',
+      payload: { loading: false, newOrder },
+    });
+  };
