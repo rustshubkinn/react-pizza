@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { arrayOf, shape, string } from 'prop-types';
 
 import FilterButton from 'components/UI/FilterButton/FilterButton';
+import Loader from 'components/UI/Loader/Loader';
 
 import { filterPizzaByType } from 'redux/actions/home';
 
@@ -9,6 +10,7 @@ import classes from './FilterByType.module.scss';
 
 const FilterByType = ({ types, id }) => {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state);
 
   const renderTypes = () =>
     types.map((type) => (
@@ -23,7 +25,12 @@ const FilterByType = ({ types, id }) => {
         {type.name}
       </FilterButton>
     ));
-  return <form id={id}>{renderTypes()}</form>;
+  return (
+    <form id={id}>
+      <Loader loading={loading} />
+      {renderTypes()}
+    </form>
+  );
 };
 
 FilterByType.propTypes = {
