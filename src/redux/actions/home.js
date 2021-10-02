@@ -53,7 +53,7 @@ export const filterPizzaByType = (type) => async (dispatch) => {
   }
 };
 
-export const sortPizza = (option) => async (dispatch) => {
+export const sortPizza = (value, isReversed) => async (dispatch) => {
   dispatch({
     type: 'SORT_PIZZA_REQUEST',
     payload: { loading: true },
@@ -61,40 +61,24 @@ export const sortPizza = (option) => async (dispatch) => {
 
   const result = await fetchPizza();
 
-  if (option.value === 'pop') {
-    const sortedPizza = result.sort((a, b) => (a.rating > b.rating ? -1 : 1));
+  const dictionary = {
+    1: 'rating',
+    2: 'price',
+    3: 'name',
+  };
 
-    dispatch({
-      type: 'SORT_PIZZA_SUCCESS',
-      payload: { loading: false, pizza: sortedPizza },
-    });
+  const sortedPizza = result.sort(
+    (a, b) => a[dictionary[value]] - b[dictionary[value]]
+  );
+
+  if (isReversed) {
+    sortedPizza.reverse();
   }
 
-  if (option.value === 'price') {
-    const sortedPizza = result.sort((a, b) => (a.price > b.price ? -1 : 1));
-
-    dispatch({
-      type: 'SORT_PIZZA_SUCCESS',
-      payload: { loading: false, pizza: sortedPizza },
-    });
-  }
-
-  if (option.value === 'alphabet') {
-    const sortedPizza = result.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-
-    dispatch({
-      type: 'SORT_PIZZA_SUCCESS',
-      payload: { loading: false, pizza: sortedPizza },
-    });
-  }
+  dispatch({
+    type: 'SORT_PIZZA_SUCCESS',
+    payload: { loading: false, pizza: sortedPizza },
+  });
 };
 
 export const addToCart =

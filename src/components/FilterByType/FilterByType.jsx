@@ -1,41 +1,39 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 
-import FilterButton from 'components/UI/FilterButton/FilterButton';
+import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
 
 import { filterPizzaByType } from 'redux/actions/home';
 
 import classes from './FilterByType.module.scss';
 
-const FilterByType = ({ types, id }) => {
+const FilterByType = ({ types }) => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
 
+  const handlePizzaFilter = (type) => dispatch(filterPizzaByType(type));
+
   const renderTypes = () =>
     types.map((type) => (
-      <FilterButton
-        onClick={(e) => {
-          e.preventDefault();
-          dispatch(filterPizzaByType(type));
-        }}
-        className={classes.filter}
+      <Button
+        onClick={() => handlePizzaFilter(type)}
+        className={classes.filter_btn}
         key={type.value}
       >
         {type.name}
-      </FilterButton>
+      </Button>
     ));
   return (
-    <form id={id}>
+    <div>
       <Loader loading={loading} />
       {renderTypes()}
-    </form>
+    </div>
   );
 };
 
 FilterByType.propTypes = {
   types: arrayOf(shape({})).isRequired,
-  id: string.isRequired,
 };
 
 export default FilterByType;

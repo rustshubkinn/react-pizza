@@ -1,70 +1,73 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 
 import { sortPizza } from 'redux/actions/home';
 
-import { ReactComponent as SortArrow } from '../../img/svg/arrow.svg';
+import { ReactComponent as SortArrow } from 'img/svg/arrow.svg';
 
 import classes from './SortSection.module.scss';
 
-const SortSection = ({ options, id }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [activeOption, setOption] = useState('популярности');
+const SortSection = ({ options }) => {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [cuurentSort, setCurrentSort] = useState(1);
+  const [isReversed, setIsReversed] = useState(false);
+  const [activeOption, setOption] = useState('популярности');
+
+  const handleSortPizza = (option) => {
+    setOption(option.name);
+    setCurrentSort(option.value);
+    dispatch(sortPizza(option.value));
+  };
+
+  const handleReverseSort = () => {
+    setIsReversed(!isReversed);
+    dispatch(sortPizza(cuurentSort, isReversed));
+  };
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   const renderOptions = () =>
     options.map((option) => (
       <button
         key={option.value}
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault();
-          setOption(option.name);
-          dispatch(sortPizza(option));
-        }}
+        type="button"
+        onClick={() => handleSortPizza(option)}
         value={option.value}
       >
         {option.name}
       </button>
     ));
 
-  const toggleDropdown = () => setIsActive(!isActive);
-
-  const enterHandler = (e) => {
-    if (e.key === 'Enter') {
-      setIsActive(!isActive);
-    }
-  };
-
   return (
-    <form>
-      <button className={classes.arrow_btn} type="submit">
+    <div className={classes.wrapper}>
+      <button
+        className={classes.arrow_btn}
+        onClick={handleReverseSort}
+        type="button"
+      >
         <SortArrow />
       </button>
       <p>Сортировка по:</p>
-      <div
+      <button
         onClick={toggleDropdown}
-        onKeyUp={enterHandler}
         className={classes.sort_popup}
-        id={id}
-        role="button"
-        tabIndex="0"
+        type="button"
       >
         {activeOption}
-        {isActive ? (
-          <div className={classes.sort_wrapper}>{renderOptions()}</div>
-        ) : (
-          <></>
-        )}
-      </div>
-    </form>
+      </button>
+      {isOpen ? (
+        <div className={classes.sort_wrapper}>{renderOptions()}</div>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };
 
 SortSection.propTypes = {
   options: arrayOf(shape({})).isRequired,
-  id: string.isRequired,
 };
 
 export default SortSection;
