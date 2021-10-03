@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import Header from 'components/Header/Header';
 import FilterByType from 'components/FilterByType/FilterByType';
-import SortSection from 'components/SortSection/SortSection';
+import SortDropdown from 'components/SortDropdown/SortDropdown';
 import PizzaList from 'components/PizzaList/PizzaList';
 import CartButton from 'components/UI/CartButton/CartButton';
 import Loader from 'components/UI/Loader/Loader';
@@ -20,7 +20,7 @@ const Home = () => {
       <main>
         <section className={classes.filter_section}>
           <FilterByType />
-          <SortSection />
+          <SortDropdown />
         </section>
         <PizzaList />
       </main>

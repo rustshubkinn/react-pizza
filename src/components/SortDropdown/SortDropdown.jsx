@@ -6,9 +6,9 @@ import { sortPizza } from 'redux/actions/home';
 
 import { ReactComponent as SortArrow } from 'img/svg/arrow.svg';
 
-import classes from './SortSection.module.scss';
+import classes from './SortDropdown.module.scss';
 
-const SortSection = () => {
+const SortDropdown = () => {
   const dispatch = useDispatch();
   const { sortOptions } = useSelector((state) => state);
   const [isOpen, setIsOpen] = useState(false);
@@ -70,4 +70,4 @@ const SortSection = () => {
   );
 };
 
-export default SortSection;
+export default SortDropdown;
