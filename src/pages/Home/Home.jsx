@@ -13,7 +13,7 @@ const Home = () => {
   const { loading } = useSelector((state) => state);
 
   return (
-    <div className={classes.wrapper}>
+    <>
       <Header>
         <CartButton />
       </Header>
@@ -25,7 +25,7 @@ const Home = () => {
         <PizzaList />
       </main>
       <Loader loading={loading} />
-    </div>
+    </>
   );
 };
 
