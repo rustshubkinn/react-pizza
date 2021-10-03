@@ -9,20 +9,15 @@ import { addToCart } from 'redux/actions/home';
 
 import classes from './OptionsSelector.module.scss';
 
-const OptionsSelector = ({ name, price, options, doughs, sizes }) => {
+const OptionsSelector = ({ pizzaId, price, options, doughs, sizes }) => {
   const dispatch = useDispatch();
-  const [activeDough, setActiveDough] = useState('');
-  const [activeSize, setActiveSize] = useState('');
+  const [activeDough, setActiveDough] = useState(null);
+  const [activeSize, setActiveSize] = useState(null);
 
   const availableDoughs = Object.values(options.doughs).map((res) => res.value);
   const availableSizes = Object.values(options.sizes).map((res) => res.value);
 
-  const dough = doughs.map((dgh) => dgh);
-  const size = sizes.map((szs) => szs);
-
-  const orderHandler = () => {
-    dispatch(addToCart({ name, price, activeDough, activeSize }));
-  };
+  const orderHandler = () => dispatch(addToCart({ pizzaId }));
 
   return (
     <div className={classes.selector_wrapper}>
@@ -34,10 +29,9 @@ const OptionsSelector = ({ name, price, options, doughs, sizes }) => {
               key={dg}
               onClick={() => setActiveDough(dg)}
               className={classNames({
-                [classes.disabled]: !dough.includes(dg),
                 [classes.active]: activeDough === dg,
               })}
-              disabled={!dough.includes(dg)}
+              disabled={!doughs.includes(dg)}
             >
               {dg}
             </button>
@@ -50,10 +44,9 @@ const OptionsSelector = ({ name, price, options, doughs, sizes }) => {
               key={sz}
               onClick={() => setActiveSize(sz)}
               className={classNames({
-                [classes.disabled]: !size.includes(sz),
                 [classes.active]: activeSize === sz,
               })}
-              disabled={!size.includes(sz)}
+              disabled={!sizes.includes(sz)}
             >
               {sz} см.
             </button>
@@ -73,7 +66,7 @@ const OptionsSelector = ({ name, price, options, doughs, sizes }) => {
 };
 
 OptionsSelector.propTypes = {
-  name: string.isRequired,
+  pizzaId: string.isRequired,
   price: number.isRequired,
   options: objectOf(arrayOf(shape({}))).isRequired,
   doughs: arrayOf(string).isRequired,

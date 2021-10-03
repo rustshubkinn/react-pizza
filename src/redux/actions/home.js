@@ -105,22 +105,21 @@ export const sortPizza = (value, isReversed) => async (dispatch) => {
 };
 
 export const addToCart =
-  ({ activeDough, activeSize, price, name }) =>
+  ({ pizzaId }) =>
   async (dispatch) => {
     dispatch({
       type: 'ADD_TO_CART_REQUEST',
       payload: { loading: true },
     });
 
-    const newOrder = {
-      name,
-      orderPrice: price,
-      activeDough,
-      activeSize,
+    const addedPizza = {
+      [pizzaId]: 1,
     };
+
+    console.log(addedPizza);
 
     dispatch({
       type: 'ADD_TO_CART_SUCCESS',
-      payload: { loading: false, newOrder },
+      payload: { loading: false },
     });
   };

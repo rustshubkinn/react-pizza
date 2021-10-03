@@ -5,24 +5,35 @@ import OptionsSelector from 'components/OptionsSelector/OptionsSelector';
 
 import classes from './Pizza.module.scss';
 
-const Pizza = ({ name, price, image, options, doughs, sizes, className }) => (
-  <div className={classNames(classes.pizza, className)}>
+const Pizza = ({
+  pizzaId,
+  name,
+  price,
+  image,
+  options,
+  doughs,
+  sizes,
+  className,
+}) => (
+  <li className={classNames(classes.pizza, className)}>
     <img src={image} alt={`${name}`} />
     <p>{name}</p>
     <div className={classes.order_wrapper}>
+      {/* TODO: change class to more descriptive */}
       <OptionsSelector
-        name={name}
+        pizzaId={pizzaId}
         price={price}
         options={options}
         doughs={doughs}
         sizes={sizes}
       />
     </div>
-  </div>
+  </li>
 );
 
 Pizza.propTypes = {
   name: string.isRequired,
+  pizzaId: string.isRequired,
   price: number.isRequired,
   image: string.isRequired,
   className: string,

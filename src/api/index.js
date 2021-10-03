@@ -11,7 +11,10 @@ export const fetchPizza = async () => {
     return [];
   }
 
-  const arrayOfPizza = Object.keys(result).map((key) => result[key]);
+  const arrayOfPizza = Object.keys(result).map((key) => ({
+    ...result[key],
+    id: key,
+  }));
   return arrayOfPizza;
 };
 

@@ -15,36 +15,29 @@ const PizzaList = () => {
     dispatch(fetchAllPizza());
   }, [dispatch]);
 
+  const renderPizza = () =>
+    pizza.map((data) => (
+      <Pizza
+        key={data.name}
+        pizzaId={data.id}
+        image={data.image}
+        name={data.name}
+        price={data.price}
+        type={data.type}
+        doughs={data.doughs}
+        sizes={data.sizes}
+        options={options}
+        className={classes.pizza_item}
+      />
+    ));
+
   return (
-    <section className={classes.pizza_lists}>
-      <h3>Все пиццы</h3>
-      <div className={classes.lists_wrapper}>
-        {pizza.map((data) => (
-          <Pizza
-            key={data.name}
-            image={data.image}
-            name={data.name}
-            price={data.price}
-            type={data.type}
-            doughs={data.doughs}
-            sizes={data.sizes}
-            options={options}
-            className={classes.pizza_item}
-          />
-        ))}
-        {pizza.map((data) => (
-          <Pizza
-            key={data.name}
-            image={data.image}
-            name={data.name}
-            price={data.price}
-            doughs={data.doughs}
-            sizes={data.sizes}
-            options={options}
-            className={classes.pizza_item}
-          />
-        ))}
-      </div>
+    <section className={classes.wrapper}>
+      <h3>Все пиццы</h3> {/* TODO: change to dynamic values */}
+      <ul className={classes.pizza_list}>
+        {renderPizza()}
+        {renderPizza()}
+      </ul>
     </section>
   );
 };

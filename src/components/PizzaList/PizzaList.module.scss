@@ -1,4 +1,4 @@
-.pizza_lists {
+.wrapper {
   display: flex;
   flex-direction: column;
 
@@ -9,15 +9,15 @@
     font-size: 32px;
     line-height: 39px;
   }
+}
 
-  .lists_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+.pizza_list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .pizza_item {
-      margin-bottom: 65px;
-    }
-  }
+.pizza_item {
+  margin-bottom: 65px;
 }
