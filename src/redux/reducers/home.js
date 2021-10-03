@@ -3,6 +3,7 @@ export const INITIAL_STATE = {
   options: [],
   filterOptions: [],
   sortOptions: [],
+  addedPizza: {},
   newOrder: { orderPrice: 0 },
   loading: false,
 };
@@ -41,13 +42,15 @@ export const home = (state = INITIAL_STATE, action) => {
       const { pizza, loading } = action.payload;
       return { ...state, pizza, loading };
     }
-    case 'ORDER_PIZZA_REQUEST': {
-      const { loading } = action.payload;
-      return { ...state, loading };
-    }
-    case 'ORDER_PIZZA_SUCCESS': {
-      const { loading, newOrder } = action.payload;
-      return { ...state, loading, newOrder };
+    case 'ADD_TO_CART': {
+      const { pizzaId } = action.payload;
+      const orderedPizza = state.addedPizza;
+      if (state.addedPizza[pizzaId]) {
+        orderedPizza[pizzaId] += 1;
+      } else {
+        orderedPizza[pizzaId] = 1;
+      }
+      return { ...state, orderedPizza };
     }
     default:
       return { ...state };
