@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import Button from 'components/UI/Button/Button';
-import Loader from 'components/UI/Loader/Loader';
 
 import { fetchFilterOptions, filterPizzaByType } from 'redux/actions/home';
 
@@ -11,7 +10,7 @@ import classes from './FilterByType.module.scss';
 
 const FilterByType = () => {
   const dispatch = useDispatch();
-  const { loading, filterOptions } = useSelector((state) => state);
+  const { filterOptions } = useSelector((state) => state);
   const [isActive, setActive] = useState(false);
 
   const handlePizzaFilter = (type) => {
@@ -35,12 +34,7 @@ const FilterByType = () => {
         {type.name}
       </Button>
     ));
-  return (
-    <div>
-      <Loader loading={loading} />
-      {renderTypes()}
-    </div>
-  );
+  return <div>{renderTypes()}</div>;
 };
 
 export default FilterByType;
