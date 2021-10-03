@@ -12,13 +12,14 @@
   .arrow_btn {
     display: flex;
 
+    padding: 5px;
+
     background: none;
     border: 0;
+  }
 
-    &:active,
-    :focus {
-      transform: rotate(180deg);
-    }
+  .reversed {
+    transform: rotate(180deg);
   }
 
   p {
@@ -32,6 +33,8 @@
 
     color: #fe5f1e;
     font-weight: 400;
+
+    background-color: #fff;
 
     border: 0;
     border-bottom: 1px dashed #fe5f1e;

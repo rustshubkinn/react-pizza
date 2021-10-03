@@ -7,14 +7,21 @@
   font-size: 16px;
 
   background: #f9f9f9;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 30px;
 
   &:hover {
     color: #fff;
 
     background: #282828;
+    border: 1px solid transparent;
 
     transition: 0.5s;
   }
+}
+
+.active {
+  color: #fff;
+
+  background: #282828;
 }

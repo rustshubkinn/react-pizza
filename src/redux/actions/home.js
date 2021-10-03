@@ -24,6 +24,29 @@ export const fetchAllPizza = () => async (dispatch) => {
   return true;
 };
 
+export const fetchFilterOptions = () => async (dispatch) => {
+  dispatch({
+    type: 'FETCH_FILTER_OPTIONS_REQUEST',
+    payload: { loading: true },
+  });
+
+  const options = await fetchOptions();
+  const filterOptions = options.types.map((res) => ({
+    value: res.value,
+    name: res.name,
+  }));
+
+  const sortOptions = options.sort_options.map((res) => ({
+    value: res.value,
+    name: res.name,
+  }));
+
+  dispatch({
+    type: 'FETCH_FILTER_OPTIONS_SUCCESS',
+    payload: { filterOptions, sortOptions, loading: false },
+  });
+};
+
 export const filterPizzaByType = (type) => async (dispatch) => {
   dispatch({
     type: 'FILTER_PIZZA_REQUEST',
@@ -32,7 +55,7 @@ export const filterPizzaByType = (type) => async (dispatch) => {
 
   const result = await fetchPizza();
 
-  if (type.value === 'all') {
+  if (type.value === 0) {
     dispatch({
       type: 'FILTER_PIZZA_SUCCESS',
       payload: {
@@ -62,9 +85,9 @@ export const sortPizza = (value, isReversed) => async (dispatch) => {
   const result = await fetchPizza();
 
   const dictionary = {
-    1: 'rating',
-    2: 'price',
-    3: 'name',
+    0: 'rating',
+    1: 'price',
+    2: 'name',
   };
 
   const sortedPizza = result.sort(

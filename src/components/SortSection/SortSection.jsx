@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { arrayOf, shape } from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import { sortPizza } from 'redux/actions/home';
 
@@ -8,14 +8,16 @@ import { ReactComponent as SortArrow } from 'img/svg/arrow.svg';
 
 import classes from './SortSection.module.scss';
 
-const SortSection = ({ options }) => {
+const SortSection = () => {
   const dispatch = useDispatch();
+  const { sortOptions } = useSelector((state) => state);
   const [isOpen, setIsOpen] = useState(false);
   const [cuurentSort, setCurrentSort] = useState(1);
   const [isReversed, setIsReversed] = useState(false);
   const [activeOption, setOption] = useState('популярности');
 
   const handleSortPizza = (option) => {
+    setIsOpen(false);
     setOption(option.name);
     setCurrentSort(option.value);
     dispatch(sortPizza(option.value));
@@ -29,7 +31,7 @@ const SortSection = ({ options }) => {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const renderOptions = () =>
-    options.map((option) => (
+    sortOptions.map((option) => (
       <button
         key={option.value}
         type="button"
@@ -43,7 +45,9 @@ const SortSection = ({ options }) => {
   return (
     <div className={classes.wrapper}>
       <button
-        className={classes.arrow_btn}
+        className={classNames(classes.arrow_btn, {
+          [classes.reversed]: isReversed,
+        })}
         onClick={handleReverseSort}
         type="button"
       >
@@ -64,10 +68,6 @@ const SortSection = ({ options }) => {
       )}
     </div>
   );
-};
-
-SortSection.propTypes = {
-  options: arrayOf(shape({})).isRequired,
 };
 
 export default SortSection;
