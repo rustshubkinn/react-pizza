@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import { sortPizza } from 'redux/actions/home';
+import { sortPizza } from 'redux/actions';
 
 import { ReactComponent as SortArrow } from 'img/svg/arrow.svg';
 

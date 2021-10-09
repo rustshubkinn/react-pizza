@@ -8,13 +8,13 @@ import Button from 'components/UI/Button/Button';
 import classes from './CartButton.module.scss';
 
 const CartButton = () => {
-  const { orderPrice } = useSelector(({ newOrder }) => newOrder);
+  const { totalPrice } = useSelector((state) => state);
 
   return (
     <Link to="/cart">
       <Button className={classes.cart_button}>
         <span className={classes.total}>
-          {orderPrice}
+          {totalPrice}
           <span>&#8381;</span>
         </span>
         <span className={classes.cart}>

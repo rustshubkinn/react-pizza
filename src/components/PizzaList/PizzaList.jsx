@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Pizza from 'components/Pizza/Pizza';
 
-import { fetchAllPizza } from 'redux/actions/home';
+import { fetchAllPizza } from 'redux/actions';
 
 import classes from './PizzaList.module.scss';
 

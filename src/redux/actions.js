@@ -112,3 +112,49 @@ export const addToCart =
       payload: { pizzaId },
     });
   };
+
+export const clearCart = () => async (dispatch) => {
+  dispatch({
+    type: 'CLEAR_CART',
+    payload: {},
+  });
+};
+
+export const deletePizza = (id, pizzaInCart) => async (dispatch) => {
+  const updatedPizza = pizzaInCart;
+
+  const deletePizzaIndex = pizzaInCart.findIndex((piz) => piz.id === id);
+
+  pizzaInCart.splice(deletePizzaIndex, 1);
+
+  dispatch({
+    type: 'DELETE_PIZZA',
+    payload: { updatedPizza },
+  });
+};
+
+export const increasePizza = (id, pizzaInCart) => async (dispatch) => {
+  const updatedPizza = pizzaInCart;
+
+  const increasePizzaIndex = pizzaInCart.findIndex((piz) => piz.id === id);
+
+  updatedPizza[increasePizzaIndex].quantity += 1;
+
+  dispatch({
+    type: 'INCREASE_PIZZA',
+    payload: { updatedPizza },
+  });
+};
+
+export const decreasePizza = (id, pizzaInCart) => async (dispatch) => {
+  const updatedPizza = pizzaInCart;
+
+  const decreasePizzaIndex = pizzaInCart.findIndex((piz) => piz.id === id);
+
+  updatedPizza[decreasePizzaIndex].quantity -= 1;
+
+  dispatch({
+    type: 'DECREASE_PIZZA',
+    payload: { updatedPizza },
+  });
+};

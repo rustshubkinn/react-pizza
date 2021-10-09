@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Button from 'components/UI/Button/Button';
 
-import { fetchFilterOptions, filterPizzaByType } from 'redux/actions/home';
+import { fetchFilterOptions, filterPizzaByType } from 'redux/actions';
 
 import classes from './FilterByType.module.scss';
 

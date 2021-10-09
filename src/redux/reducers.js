@@ -4,11 +4,17 @@ export const INITIAL_STATE = {
   filterOptions: [],
   sortOptions: [],
   addedPizza: {},
-  newOrder: { orderPrice: 0 },
+  pizzaInCart: [],
+  totalPrice: 0,
   loading: false,
 };
 
-export const home = (state = INITIAL_STATE, action) => {
+const getTotalPrice = (pizzaInCart) =>
+  pizzaInCart
+    .map((piz) => piz.price * piz.quantity)
+    .reduce((total, amount) => total + amount, 0);
+
+export const reducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_PIZZA_REQUEST': {
       const { pizza, loading, options } = action.payload;
@@ -50,7 +56,39 @@ export const home = (state = INITIAL_STATE, action) => {
       } else {
         orderedPizza[pizzaId] = 1;
       }
-      return { ...state, orderedPizza };
+      const arrOfAddedPizzaIds = Object.keys(orderedPizza);
+
+      const currentAddedPizza = state.pizza.filter((piz) =>
+        arrOfAddedPizzaIds.includes(piz.id)
+      );
+
+      const pizzaInCart = currentAddedPizza.map((piz) => ({
+        ...piz,
+        quantity: orderedPizza[piz.id],
+      }));
+
+      const totalPrice = getTotalPrice(pizzaInCart);
+
+      return { ...state, pizzaInCart, totalPrice };
+    }
+    case 'CLEAR_CART': {
+      const clearCart = [];
+      return { ...state, pizzaInCart: clearCart };
+    }
+    case 'DELETE_PIZZA': {
+      const { updatedPizza } = action.payload;
+      const totalPrice = getTotalPrice(updatedPizza);
+      return { ...state, pizzaInCart: updatedPizza, totalPrice };
+    }
+    case 'INCREASE_PIZZA': {
+      const { updatedPizza } = action.payload;
+      const totalPrice = getTotalPrice(updatedPizza);
+      return { ...state, pizzaInCart: updatedPizza, totalPrice };
+    }
+    case 'DECREASE_PIZZA': {
+      const { updatedPizza } = action.payload;
+      const totalPrice = getTotalPrice(updatedPizza);
+      return { ...state, pizzaInCart: updatedPizza, totalPrice };
     }
     default:
       return { ...state };

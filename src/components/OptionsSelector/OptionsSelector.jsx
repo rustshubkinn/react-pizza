@@ -5,7 +5,7 @@ import { arrayOf, number, objectOf, shape, string } from 'prop-types';
 
 import Button from 'components/UI/Button/Button';
 
-import { addToCart } from 'redux/actions/home';
+import { addToCart } from 'redux/actions';
 
 import classes from './OptionsSelector.module.scss';
 
@@ -17,7 +17,9 @@ const OptionsSelector = ({ pizzaId, price, options, doughs, sizes }) => {
   const availableDoughs = Object.values(options.doughs).map((res) => res.value);
   const availableSizes = Object.values(options.sizes).map((res) => res.value);
 
-  const orderHandler = () => dispatch(addToCart({ pizzaId }));
+  const orderHandler = () => {
+    dispatch(addToCart({ pizzaId }));
+  };
 
   return (
     <div className={classes.selector_wrapper}>
