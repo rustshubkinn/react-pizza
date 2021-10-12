@@ -43,9 +43,10 @@
   }
 }
 
-.order_quantity {
+.order_total {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   p {
     margin: 0 7px;
@@ -56,4 +57,14 @@
   color: #d0d0d0;
 
   border: 2px solid #d7d7d7;
+}
+
+@media (max-width: 550px) {
+  .pizza_order {
+    flex-direction: column;
+  }
+
+  .price {
+    margin: 10px 0;
+  }
 }

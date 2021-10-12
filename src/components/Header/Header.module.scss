@@ -2,10 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1328px;
+  max-width: 1328px;
 
   margin: 0 auto;
   padding: 54px 40px 40px 77px;
 
   border-bottom: 1px solid #f7f7f7;
+}
+
+@media (max-width: 678px) {
+  .header {
+    padding: 20px;
+  }
 }

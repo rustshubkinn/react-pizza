@@ -53,6 +53,8 @@ export const filterPizzaByType = (type) => async (dispatch) => {
     payload: { loading: true },
   });
 
+  const activeFilter = type.name;
+
   const result = await fetchPizza();
 
   if (type.value === 0) {
@@ -70,6 +72,7 @@ export const filterPizzaByType = (type) => async (dispatch) => {
       type: 'FILTER_PIZZA_SUCCESS',
       payload: {
         pizza: filteredPizza,
+        activeFilter,
         loading: false,
       },
     });

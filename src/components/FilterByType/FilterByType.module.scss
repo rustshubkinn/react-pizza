@@ -1,5 +1,6 @@
 .filter_btn {
   margin-right: 9px;
+
   padding: 14px 28px;
 
   color: #2c2c2c;
@@ -24,4 +25,10 @@
   color: #fff;
 
   background: #282828;
+}
+
+@media (max-width: 1204px) {
+  .filter_btn {
+    margin-top: 5px;
+  }
 }

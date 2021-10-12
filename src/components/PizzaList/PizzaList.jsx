@@ -9,7 +9,7 @@ import classes from './PizzaList.module.scss';
 
 const PizzaList = () => {
   const dispatch = useDispatch();
-  const { pizza, options } = useSelector((state) => state);
+  const { pizza, options, activeFilter } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchAllPizza());
@@ -33,7 +33,7 @@ const PizzaList = () => {
 
   return (
     <section className={classes.wrapper}>
-      <h3>Все пиццы</h3> {/* TODO: change to dynamic values */}
+      <h3>{activeFilter} пиццы</h3>
       <ul className={classes.pizza_list}>
         {renderPizza()}
         {renderPizza()}

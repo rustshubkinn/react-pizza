@@ -23,9 +23,21 @@
   }
 }
 
-.order_wrapper {
+.pizza_options {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+@media (max-width: 618px) {
+  .pizza {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 573px) {
+  .pizza {
+    flex-direction: column;
+  }
 }

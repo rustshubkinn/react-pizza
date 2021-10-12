@@ -17,9 +17,8 @@ const Pizza = ({
 }) => (
   <li className={classNames(classes.pizza, className)}>
     <img src={image} alt={`${name}`} />
-    <p>{name}</p>
-    <div className={classes.order_wrapper}>
-      {/* TODO: change class to more descriptive */}
+    <div className={classes.pizza_options}>
+      <p>{name}</p>
       <OptionsSelector
         pizzaId={pizzaId}
         price={price}

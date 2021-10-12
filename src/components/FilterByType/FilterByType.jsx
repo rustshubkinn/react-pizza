@@ -11,10 +11,10 @@ import classes from './FilterByType.module.scss';
 const FilterByType = () => {
   const dispatch = useDispatch();
   const { filterOptions } = useSelector((state) => state);
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState('Все');
 
   const handlePizzaFilter = (type) => {
-    setActive(type);
+    setActive(type.name);
     dispatch(filterPizzaByType(type));
   };
 
@@ -27,7 +27,7 @@ const FilterByType = () => {
       <Button
         onClick={() => handlePizzaFilter(type)}
         className={classNames(classes.filter_btn, {
-          [classes.active]: isActive === type,
+          [classes.active]: isActive === type.name,
         })}
         key={type.value}
       >

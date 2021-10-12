@@ -31,7 +31,7 @@ const PizzaOrder = ({ image, name, price, quantity, id }) => {
           <p>тонкое тесто, 100 см.</p>
         </div>
       </div>
-      <div className={classes.order_quantity}>
+      <div className={classes.order_total}>
         <RoundedButton onClick={decreasePizzaHandler}>
           <span>&#8722;</span>
         </RoundedButton>
@@ -40,7 +40,7 @@ const PizzaOrder = ({ image, name, price, quantity, id }) => {
           <span>&#43;</span>
         </RoundedButton>
       </div>
-      <b>
+      <b className={classes.price}>
         {price * quantity} <span>&#8381;</span>
       </b>
       <RoundedButton

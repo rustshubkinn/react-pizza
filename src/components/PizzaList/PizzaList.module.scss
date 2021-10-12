@@ -21,3 +21,9 @@
 .pizza_item {
   margin-bottom: 65px;
 }
+
+@media (max-width: 618px) {
+  .pizza_list {
+    justify-content: center;
+  }
+}

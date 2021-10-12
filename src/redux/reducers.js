@@ -4,6 +4,7 @@ export const INITIAL_STATE = {
   filterOptions: [],
   sortOptions: [],
   addedPizza: {},
+  activeFilter: 'Все',
   pizzaInCart: [],
   totalPrice: 0,
   loading: false,
@@ -37,8 +38,8 @@ export const reducers = (state = INITIAL_STATE, action) => {
       return { ...state, loading };
     }
     case 'FILTER_PIZZA_SUCCESS': {
-      const { pizza, loading } = action.payload;
-      return { ...state, pizza, loading };
+      const { pizza, loading, activeFilter } = action.payload;
+      return { ...state, pizza, loading, activeFilter };
     }
     case 'SORT_PIZZA_REQUEST': {
       const { loading } = action.payload;
@@ -73,7 +74,8 @@ export const reducers = (state = INITIAL_STATE, action) => {
     }
     case 'CLEAR_CART': {
       const clearCart = [];
-      return { ...state, pizzaInCart: clearCart };
+      const totalPrice = 0;
+      return { ...state, pizzaInCart: clearCart, totalPrice };
     }
     case 'DELETE_PIZZA': {
       const { updatedPizza } = action.payload;
